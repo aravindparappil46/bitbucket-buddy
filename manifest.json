@@ -1,22 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "AWS Account Name Finder",
+  "name": "Bitbucket Buddy",
   "version": "1.0",
-  "description": "For SSO-based AWS accounts, display the Account Name in your profile menu!",
-  "permissions": ["storage"],
+  "description": "Friends don't let friends struggle through Bitbucket Cloud",
   "content_scripts": [
     {
-      "matches": ["https://*.awsapps.com/*"],
-      "js": ["sso-content-script.js"]
-    },
-    {
       "matches": [
-        "https://*.console.aws.amazon.com/*",
-        "https://phd.aws.amazon.com/*",
-        "https://*.console.amazonaws-us-gov.com/*",
-        "https://*.console.amazonaws.cn/*"
+        "https://bitbucket.org/*"
       ],
-      "js": ["console-content-script.js"]
+      "js": ["default-to-files-changed-content-script.js"]
     }
   ],
   "icons": {

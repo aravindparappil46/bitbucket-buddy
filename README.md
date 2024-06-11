@@ -1,9 +1,10 @@
-# AWS Account Name Finder
-Chrome extension which displays the AWS Account Name on the Management Console, for SSO-based accounts!
+# Bitbucket Buddy
+Friends don't let friends struggle through Bitbucket Cloud.
 
-# Why?
-If you find yourself switching between multiple AWS accounts through your organization's SSO, then the current AWS profile menu on the Management Console doesn't show the name of the account you are in (It only shows the Account ID, which is not user-friendly).
+A Chrome extension that makes your Bitbucket Cloud life easier!
 
-This extension will display the Account Name on the Management Console's profile menu (top right menu) so that you do not have to wonder which account you have open!
-
-
+# Current Features
+- Auto-navigate to the "Files Changed" tab while reviewing Pull Requests
+With the new layout for Pull Requests, you land on an "Overview" tab by default. 
+This extension changes that to the "Files Changed" tab.
+You can still go to the Overview tab by explicitly clicking on it.
