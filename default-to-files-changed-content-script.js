@@ -39,13 +39,13 @@ function shouldRedirectToFilesChangedTab(currentPRPagePath) {
   const endsWithSlashAndNumbers = regexForEndsWithSlashAndDigits.test(currentPRPagePath);
   return (
     currentPRPagePath &&
-    currentPRPagePath != "" &&
+    currentPRPagePath !== "" &&
     endsWithSlashAndNumbers
   );
 }
 
 function pollUntilElementFoundAndThenClick(elementSelector) {
-  let isElementRendered = setInterval(() => {
+  const isElementRendered = setInterval(() => {
     if (document.querySelector(elementSelector)) {
       const element = document.querySelector(elementSelector);
       element.click();
