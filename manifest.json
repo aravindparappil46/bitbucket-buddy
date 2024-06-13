@@ -1,14 +1,14 @@
 {
   "manifest_version": 3,
   "name": "Bitbucket Buddy",
-  "version": "1.0",
+  "version": "1.1.0",
   "description": "Friends don't let friends struggle through Bitbucket Cloud",
   "content_scripts": [
     {
-      "matches": [
-        "https://bitbucket.org/*"
-      ],
-      "js": ["default-to-files-changed-content-script.js"]
+      "matches": ["https://bitbucket.org/*"],
+      "js": [
+        "default-to-files-changed-content-script.js"
+      ]
     }
   ],
   "icons": {
