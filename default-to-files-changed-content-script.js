@@ -27,28 +27,33 @@ function onMutation() {
 
 /**
  * Decides whether to redirect to the "Files Changed" tab in PR Details.
- * We should not redirect if the user explicitly clicks on the "Overview" tab or if the user is on any other PR page, like "Commits" or "new"
- * If explicitly clicked on "Overview",the URL path ends with /overview, which is ignored in this function.
- * If user navigates to a specific PR from the PRs list view, then the url path ends with the PR number, which is when we redirect.
+ * We should not redirect if the user explicitly clicks on the "Overview" tab or if the user is on any other PR page, like "Commits", "new", "update" etc
+ * If the current URL is not /<some-digits>/overview (or commits or diff), then we attempt to redirect to Files Changed tab.
+ * Worst case, even if this function returns true incorrectly, the pollUntilElementFoundAndThenClick function will fail to find the "Files Changed" link
  * 
  * @param {string} currentPRPagePath 
  * @returns {boolean}
  */
 function shouldRedirectToFilesChangedTab(currentPRPagePath) {
-  const regexForEndsWithSlashAndDigits = /\/\d+$/;
-  const endsWithSlashAndNumbers = regexForEndsWithSlashAndDigits.test(currentPRPagePath);
+  const regexSlashNumberAndNonRedirectUrlPaths = /\/\d+\/(overview|commits|diff)$/
+  const urlEndsWithNonRedirectPaths = regexSlashNumberAndNonRedirectUrlPaths.test(currentPRPagePath);
+
   return (
     currentPRPagePath &&
     currentPRPagePath !== "" &&
-    endsWithSlashAndNumbers
+    !urlEndsWithNonRedirectPaths
   );
 }
 
-function pollUntilElementFoundAndThenClick(elementSelector) {
+function pollUntilElementFoundAndThenClick(elementSelector, maxAttempts = 200) {
+  let attempts = 0;
   const isElementRendered = setInterval(() => {
-    if (document.querySelector(elementSelector)) {
-      const element = document.querySelector(elementSelector);
+    attempts++;
+    const element = document.querySelector(elementSelector);
+    if (element) {
       element.click();
+      clearInterval(isElementRendered);
+    } else if (attempts >= maxAttempts) {
       clearInterval(isElementRendered);
     }
   }, 100);
